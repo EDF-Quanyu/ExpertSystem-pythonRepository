@@ -4,7 +4,7 @@ from connector.account_config import get_scadaDB_config
 from connector.sqlalchemy_connector import SQLAlchemyConnector
 from FC.FCBasic import weatherReal
 
-logInstant = LogInstant(logName = 'ImportLC_estimatedindoortemperature', emailNotification = True)
+logInstant = LogInstant(logName='ImportLC_estimatedindoortemperature', emailNotification=True)
 
 try:
     logging.info("Start")
@@ -15,7 +15,7 @@ try:
     if dfRealWH.empty:
         logging.error("No weather info collected through API for Wuhan city.")
     else:
-        dfRealWH.to_sql('weatherRealWH', engineTarget, if_exists = 'append', index = False)
+        dfRealWH.to_sql('weatherRealWH', engineTarget, if_exists='append', index=False)
         logging.info("Insert the weather info of Wuhan to database.")
 
     # Sanya
@@ -102,10 +102,3 @@ try:
 
 except Exception as e:
     logging.error(e)
-
-
-
-
-
-
-
