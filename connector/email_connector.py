@@ -5,7 +5,7 @@ from email.header import Header
 
 def emailSend(mailGroup, subject, content):
     try:
-        message = MIMEText("<h1>'%s'</h1><p>Xiaochen Tan</p>"%content,'html')
+        message = MIMEText("<h1>'%s'</h1><p>Xiaochen Tan</p>" % content, 'html')
         message['From'] = mailGroup['sender']
         message['To'] = mailGroup['receivers'][0]
         message['Subject'] = Header(subject, 'utf-8')
@@ -18,6 +18,7 @@ def emailSend(mailGroup, subject, content):
 
     except smtplib.SMTPException:
         return 'Email send failed...'
+
 
 def alarmGroupAdmin():
     return {
