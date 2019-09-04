@@ -3,7 +3,7 @@ from email.mime.text import MIMEText
 from email.header import Header
 
 
-def emailSend(mailGroup,subject,content):
+def emailSend(mailGroup, subject, content):
     try:
         message = MIMEText("<h1>'%s'</h1><p>Xiaochen Tan</p>"%content,'html')
         message['From'] = mailGroup['sender']
