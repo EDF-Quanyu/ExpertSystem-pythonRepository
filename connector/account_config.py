@@ -1,5 +1,4 @@
-def get_scadaDB_config():
-    return {
+get_scadaDB_config = {
         'driveType': 'mssql+pymssql',
         'username': 'sa',
         'password': 'edf1234',
@@ -7,8 +6,7 @@ def get_scadaDB_config():
         'db': 'SMXDB'
     }
 
-def get_logDB_config():
-    return {
+get_logDB_config = {
         'driveType': 'mssql+pymssql',
         'username': 'sa',
         'password': 'edf1234',

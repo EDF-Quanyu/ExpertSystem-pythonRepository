@@ -1,14 +1,17 @@
 import logging
 from logHandler import LogInstant
-from connector.account_config import get_scadaDB_config
+from connector.account_config import get_scadaDB_config, get_logDB_config
 from connector.sqlalchemy_connector import SQLAlchemyConnector
 from FC.FCBasic import weatherReal
 
-logInstant = LogInstant(logName='ImportLC_estimatedindoortemperature', emailNotification=True)
+code = 'ImportLC_estimatedindoortemperature'
+engine_pythonLog = SQLAlchemyConnector(get_logDB_config).connexion
+logInstant = LogInstant(logName=code, emailNotification=True, fileHandlerEnable=False,
+                        dbLogEngine=engine_pythonLog)
 
 try:
     logging.info("Start")
-    engineTarget = SQLAlchemyConnector(get_scadaDB_config()).connexion
+    engineTarget = SQLAlchemyConnector(get_scadaDB_config).connexion
 
     # Wuhan
     dfRealWH = weatherReal('285063')

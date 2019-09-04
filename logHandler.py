@@ -8,7 +8,7 @@ from connector.sqlalchemy_connector import SQLAlchemyConnector
 # from connectors.sns_connector import SNSConnector
 from connector.email_connector import *
 
-defaultLogEngine = SQLAlchemyConnector(get_logDB_config()).connexion
+defaultLogEngine = SQLAlchemyConnector(get_logDB_config).connexion
 defaultDBLogDtypes = get_dbLogDtypes()
 levelDict = get_levelDict()
 # defaultSNSArn = 'arn:aws-cn:sns:cn-northwest-1:829296342604:LC_Alarms'
