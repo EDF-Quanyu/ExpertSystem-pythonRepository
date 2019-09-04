@@ -25,7 +25,7 @@ def alarmGroupAdmin():
         'mailHost': 'smtp.163.com',
         'port': 465,
         'userName': 'pythonalarm@163.com',
-        'password': 'pythonalarmcode',
+        'password': 'pythonalarm666',
         'sender': "pythonalarm@163.com",
         'receivers': ["13911326361@139.com"]
     }
