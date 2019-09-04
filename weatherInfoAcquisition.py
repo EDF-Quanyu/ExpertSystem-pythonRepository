@@ -1,15 +1,28 @@
 import logging
+from datetime import datetime
+import sys
+import pandas as pd
+
 from logHandler import LogInstant
 from connector.account_config import get_scadaDB_config, get_logDB_config
 from connector.sqlalchemy_connector import SQLAlchemyConnector
 from FC.FCBasic import weatherReal
 
-code = 'ImportLC_estimatedindoortemperature'
+code = 'weatherInfoAcquisition'
+logTime = datetime.now().replace(minute=0, second=0, microsecond=0)
+logTimeStr = logTime.strftime('%Y-%m-%d %H:%M:%S')
 engine_pythonLog = SQLAlchemyConnector(get_logDB_config).connexion
 logInstant = LogInstant(logName=code, emailNotification=True, fileHandlerEnable=False,
-                        dbLogEngine=engine_pythonLog)
+                        logInitiatedTime=logTime, dbLogEngine=engine_pythonLog)
+
 
 try:
+    log_state_string = f"SELECT 1 FROM {code} WHERE DT = '{logTimeStr}' AND log = 'Complete';"
+    df_jobSta = pd.read_sql_query(log_state_string, logInstant.logdb.engineTarget)
+    if not df_jobSta.empty:
+        logging.debug(f"'{code}' has already been executed at '{logTimeStr}';")
+        sys.exit()
+
     logging.info("Start")
     engineTarget = SQLAlchemyConnector(get_scadaDB_config).connexion
 
@@ -104,4 +117,4 @@ try:
     logging.info("Complete")
 
 except Exception as e:
-    logging.error(e)
+    logging.error(f'EDF - {code} - {e}')

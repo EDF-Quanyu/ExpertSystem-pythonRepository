@@ -81,3 +81,21 @@ def get_TFakeTableColumns_config():
 def get_estimatedIndoorTableColumns_config():
     columns = ['Producer', 'skidID', 'meterID', 'DT_Extraction', 'DT', 'Temp']
     return columns
+
+
+defaultLevelDict = {
+    'NOTSET': 0,
+    'DEBUG': 10,
+    'INFO': 20,
+    'WARNING': 30,
+    'ERROR': 40,
+    'CRITICAL': 50}
+
+defaultLogDtypes = {
+    'log_level': sqlalchemy.types.VARCHAR(20),
+    'log_levelname': sqlalchemy.types.VARCHAR(40),
+    'log': sqlalchemy.types.VARCHAR(2048),
+    'created_at': sqlalchemy.types.DATETIME,
+    'created_by': sqlalchemy.types.VARCHAR(200),
+    'DT': sqlalchemy.types.DATETIME
+}
