@@ -13,6 +13,7 @@ defaultDBLogDtypes = get_dbLogDtypes()
 levelDict = get_levelDict()
 # defaultSNSArn = 'arn:aws-cn:sns:cn-northwest-1:829296342604:LC_Alarms'
 
+
 def logAlarm(method):
     def wrapper(selfArg, *args, **kwargs):
         alarmRecord = args[0]
@@ -60,6 +61,7 @@ def logAlarm(method):
 #                         if not isinstance(handler, LogDBHandler):
 #                             handler.logging.error(e)
 
+
 class LogDBHandler(logging.Handler):
     def __init__(self, engineTarget, tableName, dtypes, emailEnable, codeExecutedTime, msgLevel = 'NOTSET'):
         logging.Handler.__init__(self)
@@ -101,7 +103,8 @@ class LogDBHandler(logging.Handler):
                         if not isinstance(handler, LogDBHandler):
                             logging.error(e)
 
-class LogInstant():
+
+class LogInstant:
     def __init__(self, logName, logLevel = 'DEBUG', logFormat = '%(levelname)s: %(name)s: %(asctime)s: %(message)s',
                  fileHandlerEnable = True, fileHandlerLevel = 'INFO',
                  streamHandlerEnable = True, streamHandlerLevel = 'DEBUG',
@@ -139,3 +142,4 @@ class LogInstant():
     @property
     def logConnexion(self):
         return self.__logger
+
