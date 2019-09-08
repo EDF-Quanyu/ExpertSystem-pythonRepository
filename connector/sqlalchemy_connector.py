@@ -4,6 +4,7 @@ from time import sleep
 import pandas as pd
 from sqlalchemy import create_engine
 
+
 class SQLAlchemyConnector(object):
     """description of class""" 
 
