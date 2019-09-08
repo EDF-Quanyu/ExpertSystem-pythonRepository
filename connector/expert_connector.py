@@ -6,17 +6,18 @@ from connector.account_config import get_scadaDB_config
 
 
 class ExpertConnector:
-    def __init__(self, skid_id, para_list, engine_dict=get_scadaDB_config):
+    def __init__(self, skid_id, para_list, engine_dict=get_scadaDB_config, time_scope=15):
         self.__skidID = skid_id
         self.__paraList = para_list
         self.__engine = SQLAlchemyConnector(engine_dict).connexion
+        self.__timeScope = -time_scope
 
     def data_source_acquisition(self):
         para_str = '[' + '],['.join(self.__paraList) + ']'
         sql_str = f"""
                         SELECT Keys, value FROM (
                             SELECT * FROM rawTablePVT 
-                            WHERE skidID = '{self.__skidID}' AND DT >= DATEADD(MI, -15, GETDATE())) A
+                            WHERE skidID = '{self.__skidID}' AND DT >= DATEADD(MI, {self.__timeScope}, GETDATE())) A
                         UNPIVOT (value FOR Keys IN ({para_str})) AS UPVT
                         ORDER BY Keys, DT;
                     """
