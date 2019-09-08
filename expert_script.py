@@ -16,5 +16,5 @@ data_frame_state: 返回的DataFrame的状态
 df: 近15分钟的DataFrame数组，可通过调整参数进行不同的查询：
     skid_id: 查询的机组编号
     para_list: 查询的参数列表
-    time_scope: 时间周期，缺省为15，代表近15
+    time_scope: 时间周期，缺省为15，表示使用近15分钟的分钟数据进行聚合运算
 """
