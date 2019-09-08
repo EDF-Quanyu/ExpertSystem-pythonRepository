@@ -3,9 +3,10 @@ from datetime import datetime
 import pandas as pd
 import json
 
+
 def sqlExec(sqlStr, engine):
-    conn=engine.connect()
-    trans=conn.begin()
+    conn = engine.connect()
+    trans = conn.begin()
     conn.execute(sqlStr)
     trans.commit()
     conn.close()
@@ -35,6 +36,7 @@ def weatherReal(cityId):
         dfReal = pd.io.json.json_normalize(res['data']['condition'])
         dfReal.drop(['condition', 'icon', 'vis', 'windDir', 'windDegrees'], axis=1, inplace=True)
         dfReal['dt'] = queryDT
-        dfReal.rename(columns={'updatetime': 'measureDT', 'dt':'queryDT','windLevel': 'windPower'}, inplace=True)
-        dfOutput = dfReal.loc[:,['measureDT','temp','windPower','humidity','queryDT']].reindex()
+        dfReal.rename(columns={'updatetime': 'measureDT', 'dt': 'queryDT', 'windLevel': 'windPower'}, inplace=True)
+        dfOutput = dfReal.loc[:, ['measureDT', 'temp', 'windPower', 'humidity', 'queryDT']].reindex()
     return dfOutput
+
